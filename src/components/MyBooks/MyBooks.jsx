@@ -41,11 +41,13 @@ state = {
 
   addContact = (e) => {
     e.preventDefault();
-    this.setState(prevState => {
-      const { name, number, contacts } = prevState;
-      if (this.isDublicate(name, number)) {
+    const { name, number } = this.state;
+     if (this.isDublicate(name, number)) {
         return alert(`${name}. ${number} is alredy`)
       }
+    this.setState(prevState => {
+      const { name, number, contacts } = prevState;
+     
       const newContact = {
         id: nanoid(), 
         name,
@@ -67,15 +69,26 @@ state = {
     const normalisedName = name.toLowerCase();
     const normalisedNumber = number.toLowerCase();
     const { contacts } = this.state;
-    const book = contacts.find(({ name, number }) => {
+    const result = contacts.find(({ name, number }) => {
       return (name.toLowerCase() === normalisedName && number.toLowerCase() === normalisedNumber)
     })
-    return Boolean(book)
+    return Boolean(result)
   }
   
+  getFilter() {
+    const { filter, contacts } = this.state;
+    const normalaizedFilter = filter.toLowerCase();
+    const result = contacts.filter(({ name }) => {
+      return(name.toLowerCase().includes(normalaizedFilter))
+    })
+    return result;
+    
+  }
+
   render() {
     const { addContact, handleChange } = this;
-    const { contacts } = this.state;
+    const { name, number } = this.state;
+    const contacts = this.getFilter()
     const names = contacts.map(({ id, name, number }) => <li key={id}>{name}:{number}
       <button onClick={()=>this.removeContact(id)} type="button">Delete</button></li>)
     
@@ -89,7 +102,7 @@ state = {
               <div className={styles.formGrup}>
                 <label>Name</label>
                 <input
-                  value={this.state.name}
+                  value={name}
                   onChange={handleChange}
                   placeholder="name"
                       type="text"
@@ -101,7 +114,7 @@ state = {
               <div className={styles.formGrup}>
                 <label>Number</label>
                 <input
-                  value={this.state.number}
+                  value={number}
                   onChange={handleChange}
                   placeholder="number"
                       type="number"
@@ -118,16 +131,18 @@ state = {
             <h3>Contacts</h3>
             <div className={styles.formGrup}>
                 <label>Find contacts by name</label>
-                <input
-                      type="text"
-                      name="name"
+              <input
+                onChange={handleChange}
+                placeholder="filter"
+                      type="text, number"
+                      name="filter"
                       pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
                       title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
                       required/>
             </div>
         
             <ol>
-               {names}
+              {names}
             </ol>
           </div>
         </div>

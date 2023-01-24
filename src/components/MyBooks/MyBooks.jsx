@@ -64,7 +64,7 @@ state = {
     })
   }
   
-  // Проверяем дубли--------
+  // Проверяем дубли-------
   isDublicate(name, number) {
     const normalisedName = name.toLowerCase();
     const normalisedNumber = number.toLowerCase();

@@ -43,7 +43,7 @@ class MyBooks extends Component {
     this.setState({ filter: target.value });
   };
 
-  // Проверяем дубли-------
+  // Проверяем дубли------
   isDublicate(name) {
     const normalisedName = name.toLowerCase();
     const { contacts } = this.state;

@@ -23,7 +23,7 @@ class MyBooks extends Component {
     });
   };
 
-  addContact = ({name, number}) => {
+  addContact = ({ name, number }) => {
     if (this.isDublicate(name, number)) {
       return alert(`${name}. ${number} is alredy`);
     }
@@ -39,9 +39,9 @@ class MyBooks extends Component {
     });
   };
 
-  handelFilter = ({target}) => {
-    this.setState({filter: target.value}) 
-  }
+  handelFilter = ({ target }) => {
+    this.setState({ filter: target.value });
+  };
 
   // Проверяем дубли-------
   isDublicate(name) {
@@ -68,7 +68,6 @@ class MyBooks extends Component {
   render() {
     const { addContact, removeContact, handelFilter } = this;
     const names = this.getFilter();
-
     return (
       <div>
         <h3>Phonebook</h3>
@@ -76,10 +75,8 @@ class MyBooks extends Component {
           <div className={styles.block}>
             <MyFormPhone onSubmit={addContact} />
           </div>
-
           <div className={styles.block}>
             <h3>Contacts</h3>
-
             <MyFilterPhone handleChange={handelFilter} />
             <MyPhoneList removeContact={removeContact} contacts={names} />
           </div>

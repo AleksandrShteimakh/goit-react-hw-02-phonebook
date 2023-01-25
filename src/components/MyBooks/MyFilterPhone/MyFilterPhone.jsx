@@ -1,3 +1,4 @@
+import PropTypes from "prop-types"
 import styles from "./my-filter-phone.module.css"
 
 const MyFilterPhone = ({handleChange}) => {
@@ -21,3 +22,7 @@ const MyFilterPhone = ({handleChange}) => {
 }
 
 export default MyFilterPhone;
+
+MyFilterPhone.propTypes = {
+  handleChange: PropTypes.func.isRequired,
+}

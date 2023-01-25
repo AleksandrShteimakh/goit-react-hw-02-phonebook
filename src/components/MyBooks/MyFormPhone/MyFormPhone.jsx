@@ -1,6 +1,7 @@
-import styles from "./my-form-phone.module.css";
 import { Component } from "react";
 import PropTypes from "prop-types"
+
+import styles from "./my-form-phone.module.css";
 
 class MyFormPhone extends Component{
   state = {
@@ -51,7 +52,7 @@ class MyFormPhone extends Component{
                       title="111-11-11"
                       required/>
               </div>
-              <button type="submit">Add Contact</button>
+              <button className={styles.button} type="submit">Add Contact</button>
             </form> 
     )
   }
